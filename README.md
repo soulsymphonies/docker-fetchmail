@@ -23,7 +23,7 @@ set postmaster "fetchmail"
 
 poll imap.gmail.com with proto IMAP
   user 'someusername@gmail.com' there with password 'yourpassword' is fetchmail here options ssl
-  preconnect "date >> /data/log/fetchmail.log"
+  preconnect "logdate.sh >> /data/log/fetchmail.log"
   smtphost mail.example.org
   smtpname some.user@example.org
 ```
