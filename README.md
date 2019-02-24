@@ -7,6 +7,10 @@ alpine linux with fetchmail and logrotate, orchestrated via supervisor
 ```
 docker-compose up -d
 ```
+if you are using `mailcow-dockerized` and want to integrate fetchmail, there is a sample `docker-compose-mailcow.yml` file for this scenario, just adjust your network settings if you changed the mailcow-dockerized defaults, to start the container use the following command
+```
+docker-compose -f docker-compose-mailcow.yml up -d
+```
 TIMECRON: Time to Recheck mail, if nothing set it defaults to 300 seconds (which should accept the most mail servers)
 
 # configuration
@@ -32,6 +36,7 @@ poll your.mail.server with proto IMAP
   smtpname localaddress@domain.com
 keep
 ```
+for mailcow-dockerized you can use smtphost `postfix/588`
 
 # docker-compose example
 
