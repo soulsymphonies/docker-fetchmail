@@ -19,6 +19,11 @@ ADD etc/logrotate.d/fetchmail /etc/logrotate.d/fetchmail
 ADD start.sh /bin/start.sh
 #add fetchmail_daemon script
 ADD fetchmail_daemon.sh /bin/fetchmail_daemon.sh
+# add timestamp script
+ADD logdate.sh /bin/logdate.sh
+# set execute and permissions for timestamp script
+RUN chmod 0700 /bin/logdate.sh \
+    && chown fetchmail:fetchmail /bin/logdate.sh
 
 #set startup script rights
 RUN chmod 0700 /bin/start.sh; \
