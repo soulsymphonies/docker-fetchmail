@@ -7,6 +7,9 @@ run()
     chown fetchmail:fetchmail /data/etc/fetchmailrc
     touch /data/log/fetchmail.log
     chown fetchmail:fetchmail /data/log/fetchmail.log
+	# set timezone
+	cp /usr/share/zoneinfo/$TZ /etc/localtime
+	echo "$TZ" > /etc/timezone
     # run cron daemon, which executes the logrotate job
     crond
     # collect log informations for docker logs or docker-compose logs

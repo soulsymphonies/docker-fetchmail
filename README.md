@@ -23,11 +23,15 @@ set postmaster "fetchmail"
 
 poll imap.gmail.com with proto IMAP
   user 'someusername@gmail.com' there with password 'yourpassword' is fetchmail here options ssl
+  preconnect "date >> /data/log/fetchmail.log"
   smtphost mail.example.org
   smtpname some.user@example.org
 ```
 
+* use the environment variable TZ to specify desired timezone
+
 # docker-compose example
+
 mount the folder, which contains the `etc/fetchmailrc` into the `/data` of the container
 
 ```yml
@@ -39,5 +43,6 @@ fetchmail:
     - ./fetchmail:/data:rw
   environment:
    - TIMECRON=300
+   - TZ=Europe/Berlin
 ```
 The fetchmail container logs directly into the mountpoint `log/fetchmail.log`

@@ -4,7 +4,7 @@ MAINTAINER cguenther.tu.chemnitz@gmail.com
 #install necessary packages
 RUN apk update; \
     apk upgrade; \
-    apk add fetchmail openssl logrotate;
+    apk add fetchmail openssl logrotate tzdata;
 
 #set workdir
 WORKDIR /data
