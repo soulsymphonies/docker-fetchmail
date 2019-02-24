@@ -1,0 +1,30 @@
+version: '3.5'
+
+services:
+  fetchmail :
+    image: soulsymphonies/docker-fetchmail:0.1
+    build: .
+    hostname: fetchmail
+    environment:
+      - TIMECRON=60
+      - TZ=Europe/Berlin
+    volumes:
+      - fetchmail-log:/data/log
+      - ${PWD}/conf/fetchmailrc:/data/etc/fetchmailrc
+    restart: unless-stopped
+    networks:
+      default:
+        aliases:
+          - fetchmail 
+
+networks:
+  fetchmail-net:
+    driver: bridge
+    name: fetchmail_net
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.22.22.0/24
+
+volumes:
+  fetchmail-log:

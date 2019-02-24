@@ -1,0 +1,28 @@
+version: "3.5"
+
+services:
+  fetchmail :
+    image: soulsymphonies/docker-fetchmail:0.1
+    build: .
+    hostname: fetchmail
+    environment:
+      - TIMECRON=60
+      - TZ=Europe/Berlin
+    volumes:
+      - fetchmail-log:/data/log
+      - ${PWD}/conf/fetchmailrc:/data/etc/fetchmailrc
+    restart: unless-stopped
+    dns:
+      - 172.22.1.254
+    networks:
+      default:
+        aliases:
+          - fetchmail 
+
+networks:
+  default:
+    external:
+      name: mailcow_mailcow-network  
+
+volumes:
+  fetchmail-log:

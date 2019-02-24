@@ -4,7 +4,7 @@ MAINTAINER cguenther.tu.chemnitz@gmail.com
 #install necessary packages
 RUN apk update; \
     apk upgrade; \
-    apk add fetchmail openssl logrotate tzdata supervisor;
+    apk add fetchmail openssl logrotate tzdata supervisor bash;
 
 #set workdir
 WORKDIR /data
@@ -32,9 +32,14 @@ ADD stop-supervisor.sh /bin/stop-supervisor.sh
 
 #set startup script rights
 RUN chmod 0700 /bin/start.sh; \
-    chown fetchmail:fetchmail /bin/fetchmail_daemon.sh \
-	chmod 0700 /bin/stop-supervisor.sh
+    chown fetchmail:fetchmail /bin/fetchmail_daemon.sh; \
+    chmod 0700 /bin/stop-supervisor.sh; \
+    chmod 0700 /bin/fetchmail_daemon.sh;
+
+#set up fetchmail workdir
+RUN mkdir -p /data/fetchmail; \
+	chown -cR fetchmail:fetchmail /data/fetchmail;
 
 ENTRYPOINT ["supervisord", "--nodaemon", "--configuration", "/etc/supervisord.conf"]
 
-VOLUME ["/data"]
+VOLUME ["/data/log"]
