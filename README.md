@@ -11,7 +11,7 @@ docker-compose -f docker-compose-mailcow.yml up -d
 TIMECRON: Time to Recheck mail, if nothing set it defaults to 300 seconds (which should accept the most mail servers)
 
 # configuration
-change `conf/fetchmailrc` file and adjust it to your own needs
+copy `conf/fetchmailrc_template` to `conf/fetchmailrc` and adjust it to your own needs
  - let the postmaster run as fetchmail
  - use the /data/log/fetchmail.log logging path for correct logrotate interop
  - use the preconnect line with the `logdate.sh` script for timestamps in your logs
