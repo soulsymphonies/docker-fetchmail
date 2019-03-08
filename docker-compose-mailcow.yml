@@ -3,7 +3,7 @@ version: "3.5"
 services:
   fetchmail :
     image: soulsymphonies/docker-fetchmail:0.1
-    build: .
+    build: data/build
     hostname: fetchmail
     environment:
       - TIMECRON=60
